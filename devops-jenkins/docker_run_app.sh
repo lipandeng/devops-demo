@@ -7,7 +7,7 @@ echo '--remove container'
 docker run -p 8090:8090 --name ${app_name} \
 --link mysql_3306:db \
 -v /etc/localtime:/etc/localtime \
--v /mydata/app/${app_name}/logs:/var/logs \
+-v /home/data/${app_name}/logs:/var/logs \
 -e "SPRING_PROFILES_ACTIVE=test" \
 -d devops-demo/${app_name}:1.0-SNAPSHOT
 echo '--start container--'

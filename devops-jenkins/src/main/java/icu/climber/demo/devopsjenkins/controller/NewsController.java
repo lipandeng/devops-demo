@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,11 +32,17 @@ public class NewsController {
     @ApiOperation("查询新闻列表")
     @GetMapping("/list")
     public CommonResult<CommonPage<News>> getNewsList(@RequestParam(value = "pageIndex", defaultValue = "1")
-                                                @ApiParam("页码") Integer pageIndex,
+                                                      @ApiParam("页码") Integer pageIndex,
                                                       @RequestParam(value = "pageSize", defaultValue = "10")
-                                                @ApiParam("每页数量") Integer pageSize) {
+                                                      @ApiParam("每页数量") Integer pageSize) {
         List<News> news = newsService.newsList(pageIndex, pageSize);
         return CommonResult.success(CommonPage.restPage(news));
+    }
+
+    @ApiOperation("获取当前时间")
+    @GetMapping("getTime")
+    public CommonResult<String> getTime() {
+        return CommonResult.success(new Date().toString());
     }
 
 }
