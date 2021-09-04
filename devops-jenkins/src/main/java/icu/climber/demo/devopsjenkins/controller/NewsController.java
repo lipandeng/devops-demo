@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @Description
@@ -42,7 +47,15 @@ public class NewsController {
     @ApiOperation("获取当前时间")
     @GetMapping("getTime")
     public CommonResult<String> getTime() {
-        return CommonResult.success(new Date().toString());
-    }
+        for (String item : ZoneId.getAvailableZoneIds()) {
+            System.out.printf(item + "\n");
+        }
+        //System.out.printf();
+        //new Date().toString()
+        // 推荐 LocalDateTime.now(ZoneId.systemDefault()).toString();
+        // getDisplayName(TextStyle.FULL, Locale.CHINESE)
+        ZoneId zoneId = ZoneId.systemDefault();
 
+        return CommonResult.success(zoneId.getId() + "::::---->" + LocalDateTime.now(zoneId).toString());
+    }
 }
