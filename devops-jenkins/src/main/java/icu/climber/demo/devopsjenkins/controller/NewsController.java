@@ -56,6 +56,8 @@ public class NewsController {
         // getDisplayName(TextStyle.FULL, Locale.CHINESE)
         ZoneId zoneId = ZoneId.systemDefault();
 
+        zoneId = ZoneId.of("Asia/Shanghai");
+
         return CommonResult.success(zoneId.getId() + "::::---->" + LocalDateTime.now(zoneId).toString());
     }
 }
